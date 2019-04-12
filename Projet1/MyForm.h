@@ -286,10 +286,17 @@ private: System::Void btnVoiture_Click(System::Object^  sender, System::EventArg
 		y = fenetreDetails->getValeurY();
 		vitesse = fenetreDetails->getValeurVitesse();
 		immatriculation = (msclr::interop::marshal_as<std::string>(fenetreDetails->getValeurImmatriculation()));
-		 
+		nouveau = new VehiculePromenade();
 		//ajout du véhicule
+		if (nouveau->setPosition(x, y) == true && nouveau->setImmatriculation(immatriculation) == true && nouveau->setVitesse(vitesse) == true)
+		{
+			InitialiserCombo();
+		}
+		else
+		{
+			MessageBox::Show("Veuiller entrer des valeurs valides");
+		}
 
-		InitialiserCombo();
 	}
 	else
 	{
