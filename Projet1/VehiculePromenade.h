@@ -13,9 +13,9 @@ public:
 
 	int getVitesse() const;
 	string getImmatriculation() const;
-	string getSymbole() const;
-	bool setImmatriculation(string);
-	bool setVitesse(int);
+	virtual string getSymbole() const;
+	virtual bool setImmatriculation(string);
+	 bool setVitesse(int);
 
 };
 

@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ambulance.cpp" />
+    <ClCompile Include="moto.cpp" />
     <ClCompile Include="InformationVehicule.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="vehicule.cpp" />
@@ -145,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ambulance.h" />
+    <ClInclude Include="moto.h" />
     <ClInclude Include="InformationVehicule.h">
       <FileType>CppForm</FileType>
     </ClInclude>
