@@ -16,7 +16,7 @@ VehiculePromenade::~VehiculePromenade()
 {
 }
 
-int VehiculePromenade::getVitesse() const
+int VehiculePromenade::getVitesse()
 {
 	return vitesseVehicule;
 }
@@ -26,7 +26,7 @@ string VehiculePromenade::getImmatriculation() const
 	return immatriculation;
 }
 
-string VehiculePromenade::getSymbole() const
+string VehiculePromenade::getSymbole()
 {
 	return "VROUM";
 }

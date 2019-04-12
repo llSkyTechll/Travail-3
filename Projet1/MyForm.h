@@ -288,6 +288,7 @@ private: System::Void btnVoiture_Click(System::Object^  sender, System::EventArg
 		immatriculation = (msclr::interop::marshal_as<std::string>(fenetreDetails->getValeurImmatriculation()));
 		nouveau = new VehiculePromenade();
 		//ajout du véhicule
+		bool test = nouveau->setImmatriculation(immatriculation);
 		if (nouveau->setPosition(x, y) == true && nouveau->setImmatriculation(immatriculation) == true && nouveau->setVitesse(vitesse) == true)
 		{
 			InitialiserCombo();
