@@ -16,7 +16,4 @@ public:
 	string getSymbole() const;
 	bool setImmatriculation(string);
 	bool setVitesse(int);
-
 };
-
-

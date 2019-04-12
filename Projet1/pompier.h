@@ -3,14 +3,14 @@
 #include "vehiculeUrgence.h"
 using namespace std;
 
-class Ambulance : public VehiculeUrgence
+class Pompier : public VehiculeUrgence
 {
 protected:
 
 public:
-	Ambulance();
-	Ambulance(const Ambulance&);
-	virtual ~Ambulance();
+	Pompier();
+	Pompier(const Pompier&);
+	virtual ~Pompier();
 	virtual int getVitesse();
 	virtual string getSymbole();
 	virtual bool setImmatriculation(string);
