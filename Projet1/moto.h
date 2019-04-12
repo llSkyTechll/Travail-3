@@ -12,6 +12,6 @@ public:
 	Moto(const Moto&);
 	virtual ~Moto();
 	 bool setImmatriculation(string);
-	 int getVitesse() const;
-	string getSymbole() const;
+	 int getVitesse() ;
+	string getSymbole() ;
 };

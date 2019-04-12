@@ -28,11 +28,11 @@ bool Moto::setImmatriculation(string inImmatriculation)
 	return valide;
 }
 
-int Moto::getVitesse() const
+int Moto::getVitesse() 
 {
 	return vitesseVehicule;
 }
-string Moto::getSymbole() const
+string Moto::getSymbole() 
 {
 	return "GANG";
 }
