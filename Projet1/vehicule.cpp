@@ -21,11 +21,6 @@ string Vehicule::getImmatriculation() const
 	return immatriculation;
 }
 
-bool Vehicule::setImmatriculation(string inImmatriculation)
-{
-	return false;
-}
-
 bool Vehicule::setVitesse(int inVitesse)
 {
 	return false;

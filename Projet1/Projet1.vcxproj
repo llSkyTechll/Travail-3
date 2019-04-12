@@ -138,6 +138,7 @@
     <ClCompile Include="moto.cpp" />
     <ClCompile Include="InformationVehicule.cpp" />
     <ClCompile Include="position.cpp" />
+    <ClCompile Include="pompier.cpp" />
     <ClCompile Include="vehicule.cpp" />
     <ClCompile Include="donnees.cpp" />
     <ClCompile Include="MyForm.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="InformationVehicule.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="pompier.h" />
     <ClInclude Include="vehicule.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="donnees.h" />
