@@ -28,7 +28,7 @@ bool Moto::setImmatriculation(string inImmatriculation)
 	return valide;
 }
 
-int Moto::getVitesse()
+int Moto::getVitesse() const
 {
 	return vitesseVehicule;
 }
