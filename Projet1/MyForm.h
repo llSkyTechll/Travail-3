@@ -195,7 +195,7 @@ namespace Projet1 {
 		{
 			if (flotte.getVehicule(cpt) != NULL)
 			{
-				Label^ nouveauLabel = CreerConteneurDuVehicule();
+				Label^ nouveauLabel = CreerConteneurDuVehicule(cpt);
 				AfficherUnVehicule(flotte.getVehicule(cpt), nouveauLabel);
 			}
 		}
@@ -213,14 +213,14 @@ namespace Projet1 {
 	}
 
 	//crée un label de façon dynamique afin d'y faire afficher un véhicule
-	Label^ CreerConteneurDuVehicule()
+	Label^ CreerConteneurDuVehicule(int inPosition)
 	{
 		Label^  nouveauLabel;
 		nouveauLabel = gcnew System::Windows::Forms::Label();
 		nouveauLabel->AutoSize = true;
 		nouveauLabel->Location = System::Drawing::Point(1, 1);
 		nouveauLabel->Size = System::Drawing::Size(10, 10);
-		nouveauLabel->Text = "";
+		nouveauLabel->Text = gcnew String(flotte.getVehicule(inPosition)->getSymbole().c_str());
 		this->Controls->Add(nouveauLabel);
 		return nouveauLabel;
 	}
@@ -308,10 +308,18 @@ private: System::Void btnVoiture_Click(System::Object^  sender, System::EventArg
 		y = fenetreDetails->getValeurY();
 		vitesse = fenetreDetails->getValeurVitesse();
 		immatriculation = (msclr::interop::marshal_as<std::string>(fenetreDetails->getValeurImmatriculation()));
-		 
+		nouveau = new VehiculePromenade();
 		//ajout du véhicule
+		bool test = nouveau->setImmatriculation(immatriculation);
+		if (nouveau->setPosition(x, y) == true && nouveau->setImmatriculation(immatriculation) == true && nouveau->setVitesse(vitesse) == true)
+		{
+			InitialiserCombo();
+		}
+		else
+		{
+			MessageBox::Show("Veuiller entrer des valeurs valides");
+		}
 
-		InitialiserCombo();
 	}
 	else
 	{

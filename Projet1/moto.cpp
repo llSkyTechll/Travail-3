@@ -20,7 +20,7 @@ bool Moto::setImmatriculation(string inImmatriculation)
 	//'' pour un caractere
 	//"" pour une chaine
 	bool valide = false;
-	if (inImmatriculation.substr(0, 1) == "MO")
+	if (inImmatriculation.substr(0, 2) == "MO")
 	{
 		immatriculation = inImmatriculation;
 		valide = true;

@@ -27,7 +27,7 @@ string Pompier::getSymbole()
 
 bool Pompier::setImmatriculation(string inImmatriculation)
 {
-	if (inImmatriculation.substr(0, 1) == "PO")
+	if (inImmatriculation.substr(0, 2) == "PO")
 	{
 		immatriculation = inImmatriculation;
 		return true;
