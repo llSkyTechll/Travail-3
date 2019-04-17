@@ -16,7 +16,7 @@ VehiculePromenade::~VehiculePromenade()
 {
 }
 
-int VehiculePromenade::getVitesse() const
+int VehiculePromenade::getVitesse()
 {
 	return vitesseVehicule;
 }
@@ -26,7 +26,7 @@ string VehiculePromenade::getImmatriculation() const
 	return immatriculation;
 }
 
-string VehiculePromenade::getSymbole() const
+string VehiculePromenade::getSymbole()
 {
 	return "VROUM";
 }
@@ -46,7 +46,7 @@ bool VehiculePromenade::setImmatriculation(string inImmatriculation)
 	//'' pour un caractere
 	//"" pour une chaine
 	bool valide = false;
-	if(inImmatriculation.substr(0,1)=="VP")
+	if(inImmatriculation.substr(0,2)=="VP")
 	{ 
 		immatriculation = inImmatriculation;
 		valide = true;

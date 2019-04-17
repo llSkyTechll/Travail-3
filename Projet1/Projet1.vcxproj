@@ -135,8 +135,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ambulance.cpp" />
+    <ClCompile Include="moto.cpp" />
     <ClCompile Include="InformationVehicule.cpp" />
     <ClCompile Include="position.cpp" />
+    <ClCompile Include="pompier.cpp" />
     <ClCompile Include="vehicule.cpp" />
     <ClCompile Include="donnees.cpp" />
     <ClCompile Include="MyForm.cpp" />
@@ -145,9 +147,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ambulance.h" />
+    <ClInclude Include="moto.h" />
     <ClInclude Include="InformationVehicule.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="pompier.h" />
     <ClInclude Include="vehicule.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="donnees.h" />

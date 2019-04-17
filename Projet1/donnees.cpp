@@ -4,7 +4,7 @@ Donnees::Donnees()
 {
 	for (int cpt = 0; cpt < maxVehicule; cpt++)
 	{
-		flotteVehicules[maxVehicule] = NULL;
+		flotteVehicules[cpt] = NULL;
 	}
 	InitialiserFlotteDepart();
 }
@@ -25,14 +25,14 @@ void Donnees::InitialiserFlotteDepart()
 	bool valide = false;
 	bool ajout;	
 	Vehicule* vehicule = NULL;
-	//vehicule = new VehiculePromenade();
-	valide = AssignerValeurs(vehicule, 200, 100, "P111", 1);
+	vehicule = new VehiculePromenade();
+	valide = AssignerValeurs(vehicule, 200, 100, "VP11", 1);
 	if (valide)
 	{
 		ajout = AjouterVehicule(vehicule);
 	}
-	//vehicule = new Ambulance();
-	valide = AssignerValeurs(vehicule, 400, 100, "A2020", 2);
+	vehicule = new Ambulance();
+	valide = AssignerValeurs(vehicule, 400, 100, "AM20", 2);
 	if (valide)
 	{
 		ajout = AjouterVehicule(vehicule);
@@ -41,13 +41,26 @@ void Donnees::InitialiserFlotteDepart()
 bool Donnees::AssignerValeurs(Vehicule* inVehicule, int inX, int inY, string inImmatriculation, int inVitesse)
 {
 	bool valide = false;
+	valide = inVehicule->setPosition(inX, inY);
+	valide = inVehicule->setImmatriculation(inImmatriculation);
+	valide = inVehicule->setVitesse(inVitesse);
 
 	return valide;
 }
 bool Donnees::AjouterVehicule(Vehicule* nouveauVehicule)
 {
 	bool ajoutEffectue = false;
+	int cpt = 0;
+	while(cpt <=maxVehicule)
+	{
+		if (flotteVehicules[cpt] == NULL&&ajoutEffectue == false)
+		{
+			flotteVehicules[cpt] = nouveauVehicule;
+			ajoutEffectue = true;
+		}
+		cpt++;
 
+	}	
 	return ajoutEffectue;
 }
 

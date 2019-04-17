@@ -11,5 +11,8 @@ public:
 	VehiculeUrgence();
 	VehiculeUrgence(const VehiculeUrgence&);
 	virtual ~VehiculeUrgence();
+	virtual int getVitesse() = 0;
+	virtual string getSymbole() = 0;
 	bool setVitesse(int);
+	virtual bool setImmatriculation(string) = 0;
 };

@@ -12,4 +12,6 @@ public:
 	Ambulance(const Ambulance&);
 	virtual ~Ambulance();
 	virtual int getVitesse();
+	virtual string getSymbole();
+	virtual bool setImmatriculation(string);
 };

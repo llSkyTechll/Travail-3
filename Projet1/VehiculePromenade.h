@@ -11,12 +11,9 @@ public:
 	VehiculePromenade(const VehiculePromenade&invehiculePromenade);
 	virtual ~VehiculePromenade();
 
-	int getVitesse() const;
+	virtual int getVitesse() ;
 	string getImmatriculation() const;
-	string getSymbole() const;
-	bool setImmatriculation(string);
-	bool setVitesse(int);
-
+	virtual string getSymbole() ;
+	virtual bool setImmatriculation(string);
+	virtual bool setVitesse(int);
 };
-
-

@@ -16,7 +16,9 @@ public:
 	virtual string getImmatriculation() const;
 	virtual int getVitesse() = 0;
 	virtual string getSymbole() = 0;
-	virtual bool setImmatriculation(string);
+	virtual bool setImmatriculation(string) = 0;
 	virtual bool setVitesse(int);
 	bool setPosition(int, int);
+	int getPositionX() const;
+	int getPositionY() const;
 };
