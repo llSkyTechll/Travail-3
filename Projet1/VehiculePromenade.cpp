@@ -46,7 +46,7 @@ bool VehiculePromenade::setImmatriculation(string inImmatriculation)
 	//'' pour un caractere
 	//"" pour une chaine
 	bool valide = false;
-	if(inImmatriculation.substr(0,1)=="VP")
+	if(inImmatriculation.substr(0,2)=="VP")
 	{ 
 		immatriculation = inImmatriculation;
 		valide = true;

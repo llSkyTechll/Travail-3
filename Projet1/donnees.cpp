@@ -26,7 +26,7 @@ void Donnees::InitialiserFlotteDepart()
 	bool ajout;	
 	Vehicule* vehicule = NULL;
 	vehicule = new VehiculePromenade();
-	valide = AssignerValeurs(vehicule, 200, 100, "PO11", 1);
+	valide = AssignerValeurs(vehicule, 200, 100, "VP11", 1);
 	if (valide)
 	{
 		ajout = AjouterVehicule(vehicule);
@@ -50,15 +50,17 @@ bool Donnees::AssignerValeurs(Vehicule* inVehicule, int inX, int inY, string inI
 bool Donnees::AjouterVehicule(Vehicule* nouveauVehicule)
 {
 	bool ajoutEffectue = false;
-	for (int cpt = 0; cpt < maxVehicule; cpt++)
+	int cpt = 0;
+	while(cpt <=maxVehicule)
 	{
-		if (flotteVehicules[cpt] == NULL)
+		if (flotteVehicules[cpt] == NULL&&ajoutEffectue == false)
 		{
 			flotteVehicules[cpt] = nouveauVehicule;
 			ajoutEffectue = true;
 		}
-		
-	}
+		cpt++;
+
+	}	
 	return ajoutEffectue;
 }
 

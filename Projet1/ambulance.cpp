@@ -27,7 +27,7 @@ string Ambulance::getSymbole()
 
 bool Ambulance::setImmatriculation(string inImmatriculation)
 {
-	if (inImmatriculation.substr(0, 1) == "AM")
+	if (inImmatriculation.substr(0, 2) == "AM")
 	{
 		immatriculation = inImmatriculation;
 		return true;
