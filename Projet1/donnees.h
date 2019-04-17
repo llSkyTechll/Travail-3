@@ -17,7 +17,7 @@ public:
 	Donnees::~Donnees();
 	Vehicule* getVehicule(int);
 	bool AssignerValeurs(Vehicule* inVehicule, int inX, int inY, string inImmatriculation, int inVitesse);
-	bool AjouterVehicule(Vehicule*);
+	int AjouterVehicule(Vehicule*);
 	bool EnleverVehicule(int);
 };
 

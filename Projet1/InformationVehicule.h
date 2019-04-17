@@ -121,6 +121,7 @@ namespace Projet1 {
 			this->btnConfirmer->TabIndex = 4;
 			this->btnConfirmer->Text = L"Confirmer valeurs";
 			this->btnConfirmer->UseVisualStyleBackColor = true;
+			this->btnConfirmer->Click += gcnew System::EventHandler(this, &InformationVehicule::btnConfirmer_Click);
 			// 
 			// label1
 			// 
@@ -181,11 +182,19 @@ namespace Projet1 {
 
 		public: int getValeurX()
 		{
-			return Convert::ToInt32(txtX->Text);
+			if (txtX->Text != "" && Convert::ToInt32(txtX->Text) > -1)
+			{
+				return Convert::ToInt32(txtX->Text);
+			}
+
 		}
 		public: int getValeurY()
 		{
-			return Convert::ToInt32(txtY->Text);
+			if (txtY->Text != "" && Convert::ToInt32(txtY->Text) > -1)
+			{
+				return Convert::ToInt32(txtY->Text);
+			}
+
 		}
 		public: int getValeurVitesse()
 		{
@@ -196,5 +205,7 @@ namespace Projet1 {
 			return txtImmatriculation->Text;
 		}
 #pragma endregion
-	};
+	private: System::Void btnConfirmer_Click(System::Object^  sender, System::EventArgs^  e) {
+	}
+};
 }

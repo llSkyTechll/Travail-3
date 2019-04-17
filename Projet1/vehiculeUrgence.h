@@ -15,4 +15,5 @@ public:
 	virtual string getSymbole() = 0;
 	bool setVitesse(int);
 	virtual bool setImmatriculation(string) = 0;
+	virtual void deplacerVehicule(int, int) = 0;
 };

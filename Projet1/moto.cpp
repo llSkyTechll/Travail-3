@@ -32,7 +32,53 @@ int Moto::getVitesse()
 {
 	return vitesseVehicule;
 }
+
 string Moto::getSymbole() 
 {
 	return "GANG";
+}
+
+void Moto::deplacerVehicule(int inX, int inY)
+{
+	if (positionVehicule.getPositionX() != inX)
+	{
+		if (positionVehicule.getPositionX() < inX)
+		{
+			positionVehicule.setPosition((positionVehicule.getPositionX() + vitesseVehicule), positionVehicule.getPositionY());
+			if (positionVehicule.getPositionX() > inX)
+			{
+				positionVehicule.setPosition(inX, positionVehicule.getPositionY());
+			}
+		}
+		else
+		{
+			positionVehicule.setPosition((positionVehicule.getPositionX() - vitesseVehicule), positionVehicule.getPositionY());
+			if (positionVehicule.getPositionX() < inX)
+			{
+				positionVehicule.setPosition(inX, positionVehicule.getPositionY());
+			}
+		}
+	}
+	else
+	{
+		if (positionVehicule.getPositionY() != inY)
+		{
+			if (positionVehicule.getPositionY() < inY)
+			{
+				positionVehicule.setPosition(inX, (positionVehicule.getPositionY() + vitesseVehicule));
+				if (positionVehicule.getPositionX() > inY)
+				{
+					positionVehicule.setPosition(positionVehicule.getPositionX(), inY);
+				}
+			}
+			else
+			{
+				positionVehicule.setPosition(inX, (positionVehicule.getPositionY() - vitesseVehicule));
+				if (positionVehicule.getPositionX() < inY)
+				{
+					positionVehicule.setPosition(positionVehicule.getPositionX(), inY);
+				}
+			}
+		}
+	}
 }

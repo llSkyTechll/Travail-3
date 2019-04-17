@@ -34,3 +34,34 @@ bool Ambulance::setImmatriculation(string inImmatriculation)
 	}
 	return false;
 }
+
+void Ambulance::deplacerVehicule(int inX, int inY)
+{
+	float DeltaY = (inY - positionVehicule.getPositionY());
+	float DeltaX = (inX - positionVehicule.getPositionX());
+	float a = (DeltaY / DeltaX);
+	float b = inY - (a*inX);
+	if (positionVehicule.getPositionX() != inX)
+	{
+		if (positionVehicule.getPositionX() < inX)
+		{
+			positionVehicule.setPosition((positionVehicule.getPositionX() + (3 * vitesseVehicule)), (a*(positionVehicule.getPositionX() + (3 * vitesseVehicule)) + b));
+			if (positionVehicule.getPositionX() > inX)
+			{
+				positionVehicule.setPosition(inX, positionVehicule.getPositionY());
+			}
+		}
+		else
+		{
+			positionVehicule.setPosition((positionVehicule.getPositionX() - (3 * vitesseVehicule)), (a*(positionVehicule.getPositionX() - (3 * vitesseVehicule)) + b));
+			if (positionVehicule.getPositionX() < inX)
+			{
+				positionVehicule.setPosition(inX, positionVehicule.getPositionY());
+			}
+		}
+	}
+	else
+	{
+		positionVehicule.setPosition(inX, inY);
+	}
+}

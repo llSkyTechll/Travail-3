@@ -47,21 +47,20 @@ bool Donnees::AssignerValeurs(Vehicule* inVehicule, int inX, int inY, string inI
 
 	return valide;
 }
-bool Donnees::AjouterVehicule(Vehicule* nouveauVehicule)
+int Donnees::AjouterVehicule(Vehicule* nouveauVehicule)
 {
-	bool ajoutEffectue = false;
 	int cpt = 0;
-	while(cpt <=maxVehicule)
+	while(cpt < maxVehicule)
 	{
-		if (flotteVehicules[cpt] == NULL&&ajoutEffectue == false)
+		if (flotteVehicules[cpt] == NULL)
 		{
 			flotteVehicules[cpt] = nouveauVehicule;
-			ajoutEffectue = true;
+			return cpt;
 		}
 		cpt++;
 
 	}	
-	return ajoutEffectue;
+	return -1;
 }
 
 Vehicule* Donnees::getVehicule(int inIndice)
@@ -81,7 +80,9 @@ bool Donnees::EnleverVehicule(int place)
 	{ 
 		if (flotteVehicules[place] != NULL)
 		{
-
+			delete flotteVehicules[place];
+			flotteVehicules[place] = NULL;
+			detruit = true;
 		}	
 	}
 	return detruit;

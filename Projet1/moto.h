@@ -14,4 +14,5 @@ public:
 	 bool setImmatriculation(string);
 	 int getVitesse() ;
 	string getSymbole() ;
+	void deplacerVehicule(int, int);
 };

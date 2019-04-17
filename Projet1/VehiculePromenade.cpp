@@ -53,3 +53,49 @@ bool VehiculePromenade::setImmatriculation(string inImmatriculation)
 	}
 	return valide;
 }
+
+void VehiculePromenade::deplacerVehicule(int inX, int inY)
+{
+	float DeltaY = (inY - positionVehicule.getPositionY());
+	float DeltaX = (inX - positionVehicule.getPositionX());
+	float a = (DeltaY / DeltaX);
+	float b = inY - (a*inX);
+	if (positionVehicule.getPositionX() != inX)
+	{
+		if (positionVehicule.getPositionX() < inX)
+		{
+			positionVehicule.setPosition((positionVehicule.getPositionX() + vitesseVehicule), (a*(positionVehicule.getPositionX() + vitesseVehicule) + b));
+			if (positionVehicule.getPositionX() > inX)
+			{
+				positionVehicule.setPosition(inX, positionVehicule.getPositionY());
+			}
+		}
+		else
+		{
+			positionVehicule.setPosition((positionVehicule.getPositionX() - vitesseVehicule), (a*(positionVehicule.getPositionX() -  vitesseVehicule) + b));
+			if (positionVehicule.getPositionX() < inX)
+			{
+				positionVehicule.setPosition(inX, positionVehicule.getPositionY());
+			}
+		}
+	}
+	else
+	{
+		if (positionVehicule.getPositionY() < inY)
+		{
+			positionVehicule.setPosition(inX,(positionVehicule.getPositionY() + vitesseVehicule));
+			if (positionVehicule.getPositionX() > inY)
+			{
+				positionVehicule.setPosition(positionVehicule.getPositionX(), inY);
+			}
+		}
+		else
+		{
+			positionVehicule.setPosition(inX, (positionVehicule.getPositionY() - vitesseVehicule));
+			if (positionVehicule.getPositionX() < inY)
+			{
+				positionVehicule.setPosition(positionVehicule.getPositionX(), inY);
+			}
+		}
+	}
+}

@@ -235,58 +235,52 @@ namespace Projet1 {
 		String^ immatriculation = "";
 		int cpt = 0;
 		bool trouve = false;
-		while (trouve == false && cpt < maxVehicule)
+		if (comboVehicule->Text != "")
 		{
-			if (flotte.getVehicule(cpt) != NULL)
+			while (trouve == false && cpt < maxVehicule)
 			{
-				leVehicule = flotte.getVehicule(cpt);
-				if (gcnew String(leVehicule->getImmatriculation().c_str()) == comboVehicule->Text)
+				if (flotte.getVehicule(cpt) != NULL)
 				{
-					vitesse = leVehicule->getVitesse();
-					immatriculation = gcnew String(leVehicule->getImmatriculation().c_str());
-					x = leVehicule->getPositionX();
-					y = leVehicule->getPositionY();
-					trouve = true;
+					leVehicule = flotte.getVehicule(cpt);
+					if (gcnew String(leVehicule->getImmatriculation().c_str()) == comboVehicule->Text)
+					{
+						vitesse = leVehicule->getVitesse();
+						immatriculation = gcnew String(leVehicule->getImmatriculation().c_str());
+						x = leVehicule->getPositionX();
+						y = leVehicule->getPositionY();
+						trouve = true;
+					}
+					else
+					{
+						leVehicule = NULL;
+						cpt++;
+					}
 				}
 				else
 				{
-					leVehicule = NULL;
 					cpt++;
 				}
 			}
-			else
+			Label^ label = TrouverConteneurDuVehicule(gcnew String(leVehicule->getImmatriculation().c_str()));
+			//ouvre une fenêtre de dialogue permettant d'indiquer la nouvelle position désirée
+			InformationVehicule^ fenetreDetails = gcnew InformationVehicule(x, y, immatriculation, vitesse);
+			if (fenetreDetails->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 			{
-				cpt++;
+				//récupérer valeurs x et y entrés dans la fenêtre de dialogue
+				x = fenetreDetails->getValeurX();
+				y = fenetreDetails->getValeurY();
+				//déplacement du véhicule à l'écran
+				while (x != leVehicule->getPositionX() || y != leVehicule->getPositionY())
+				{
+					leVehicule->deplacerVehicule(x, y);
+					AfficherUnVehicule(leVehicule, label);
+					Sleep(20);
+				}
 			}
 		}
-
-		Label^ label = TrouverConteneurDuVehicule(gcnew String(leVehicule->getImmatriculation().c_str()));
-	
-		//ouvre une fenêtre de dialogue permettant d'indiquer la nouvelle position désirée
-		InformationVehicule^ fenetreDetails = gcnew InformationVehicule(x,y,immatriculation, vitesse);
-		if (fenetreDetails->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+		else
 		{
-			//récupérer valeurs x et y entrés dans la fenêtre de dialogue
-			x = fenetreDetails->getValeurX();
-			y = fenetreDetails->getValeurY();
-			//déplacement du véhicule à l'écran
-			float DeltaY = (y - leVehicule->getPositionY());
-			float DeltaX = (x - leVehicule->getPositionX());
-			float a = (y - leVehicule->getPositionY()) / (x - leVehicule->getPositionX());
-			float b = y - (a*x);
-			while (x != leVehicule->getPositionX() && y != leVehicule->getPositionY())
-			{
-				if (leVehicule->getPositionX() < x)
-				{
-					leVehicule->setPosition(leVehicule->getPositionX() + leVehicule->getVitesse(), (a*(leVehicule->getPositionX() + leVehicule->getVitesse())) + b);
-				}
-				else
-				{
-					leVehicule->setPosition(leVehicule->getPositionX() - leVehicule->getVitesse(), (a*(leVehicule->getPositionX() - leVehicule->getVitesse()))+ b);
-				}
-				AfficherUnVehicule(leVehicule, label);
-				Sleep(20);
-			}
+			MessageBox::Show("Veuillez sélectionner un véhicule.");
 		}
 	}
 
@@ -313,6 +307,7 @@ namespace Projet1 {
 
 //création d'un nouveau véhicule
 private: System::Void btnVoiture_Click(System::Object^  sender, System::EventArgs^  e) {
+	Button^ Boutton = (Button^)sender;
 	Vehicule* nouveau = NULL;
 	int x, y, vitesse = 0;
 	string immatriculation;
@@ -325,18 +320,34 @@ private: System::Void btnVoiture_Click(System::Object^  sender, System::EventArg
 		y = fenetreDetails->getValeurY();
 		vitesse = fenetreDetails->getValeurVitesse();
 		immatriculation = (msclr::interop::marshal_as<std::string>(fenetreDetails->getValeurImmatriculation()));
-		nouveau = new VehiculePromenade();
+		if (Boutton->Name == "btnVoiture")
+		{
+			nouveau = new VehiculePromenade();
+		}
+		else if (Boutton->Name == "btnPompier")
+		{
+			nouveau = new Pompier();
+		}
+		else if (Boutton->Name == "btnAmbulance")
+		{
+			nouveau = new Ambulance();
+		}
+		else
+		{
+			nouveau = new Moto();
+		}
 		//ajout du véhicule
-		bool test = nouveau->setImmatriculation(immatriculation);
 		if (nouveau->setPosition(x, y) == true && nouveau->setImmatriculation(immatriculation) == true && nouveau->setVitesse(vitesse) == true)
 		{
+			int position = flotte.AjouterVehicule(nouveau);
 			InitialiserCombo();
+			Label^ label = CreerConteneurDuVehicule(position);
+			AfficherUnVehicule(nouveau, label);
 		}
 		else
 		{
 			MessageBox::Show("Veuiller entrer des valeurs valides");
 		}
-
 	}
 	else
 	{
@@ -347,10 +358,40 @@ private: System::Void btnVoiture_Click(System::Object^  sender, System::EventArg
 //pour enlever un véhicule de la flotte et le faire disparaître de l'écran
 private: System::Void btnEnlever_Click(System::Object^  sender, System::EventArgs^  e) {
 		//enlever le bon véhicule de la flotte avant de le faire disparaître de l'écran
-
-		Label^ label = nullptr;
-		Controls->Remove(label);
-		InitialiserCombo();
+	if (comboVehicule->Text != "")
+	{
+		bool trouve = false;
+		int cpt = 0;
+		while (cpt < maxVehicule && trouve == false)
+		{
+			if (gcnew String(flotte.getVehicule(cpt)->getImmatriculation().c_str()) == comboVehicule->Text)
+			{
+				vehiculeCourant = flotte.getVehicule(cpt);
+				Label^ label = TrouverConteneurDuVehicule(gcnew String(vehiculeCourant->getImmatriculation().c_str()));
+				
+				if (flotte.EnleverVehicule(cpt) == false)
+				{
+					MessageBox::Show("Problème lors de la suppression du véhicule.");
+				}
+				else
+				{
+					MessageBox::Show("Suppression effectuée.");
+					Controls->Remove(label);
+					comboVehicule->Text = "";
+					InitialiserCombo();
+				}
+				trouve = true;
+			}
+			else
+			{
+				cpt++;
+			}
+		}
+	}
+	else
+	{
+		MessageBox::Show("Veuillez sélectionner un véhicule.");
+	}
 }
 };
 }

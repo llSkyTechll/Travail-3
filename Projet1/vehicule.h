@@ -21,4 +21,5 @@ public:
 	bool setPosition(int, int);
 	int getPositionX() const;
 	int getPositionY() const;
+	virtual void deplacerVehicule(int,int) = 0;
 };
