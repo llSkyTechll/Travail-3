@@ -20,6 +20,14 @@ string Vehicule::getImmatriculation() const
 {
 	return immatriculation;
 }
+int Vehicule::getPositionX()const
+{
+	return positionVehicule.getPositionX();
+}
+int Vehicule::getPositionY()const
+{
+	return positionVehicule.getPositionY();
+}
 
 bool Vehicule::setVitesse(int inVitesse)
 {

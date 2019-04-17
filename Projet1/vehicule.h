@@ -19,4 +19,6 @@ public:
 	virtual bool setImmatriculation(string) = 0;
 	virtual bool setVitesse(int);
 	bool setPosition(int, int);
+	int getPositionX() const;
+	int getPositionY() const;
 };
