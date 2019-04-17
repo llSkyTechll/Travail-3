@@ -209,7 +209,7 @@ namespace Projet1 {
 		int y = 1;
 		label->Location = System::Drawing::Point(x, y);
 		label->Name = gcnew String(unVehicule->getImmatriculation().c_str());
-		label->Text = "symbole de la clase";
+		label->Text = gcnew String(unVehicule->getSymbole().c_str());
 	}
 
 	//crée un label de façon dynamique afin d'y faire afficher un véhicule
@@ -233,7 +233,29 @@ namespace Projet1 {
 		int y = 1;
 		int vitesse = 1;
 		String^ immatriculation = "";
-		//Label^ label = TrouverConteneurDuVehicule(gcnew String(leVehicule->getImmatriculation().c_str()));
+		int cpt = 0;
+		bool trouve = false;
+		while (trouve == false && cpt < maxVehicule)
+		{
+			if (flotte.getVehicule(cpt) != NULL)
+			{
+				leVehicule = flotte.getVehicule(cpt);
+				if (gcnew String(leVehicule->getImmatriculation().c_str()) == comboVehicule->Text)
+				{
+					vitesse = leVehicule->getVitesse();
+					immatriculation = gcnew String(leVehicule->getImmatriculation().c_str());
+					x = leVehicule->getPositionX();
+					y = leVehicule->getPositionY();
+					trouve = true;
+				}
+				else
+				{
+					leVehicule = NULL;
+				}
+			}
+		}
+
+		Label^ label = TrouverConteneurDuVehicule(gcnew String(leVehicule->getImmatriculation().c_str()));
 	
 		//ouvre une fenêtre de dialogue permettant d'indiquer la nouvelle position désirée
 		InformationVehicule^ fenetreDetails = gcnew InformationVehicule(x,y,immatriculation, vitesse);
