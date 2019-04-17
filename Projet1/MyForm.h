@@ -205,8 +205,8 @@ namespace Projet1 {
 	//le véhicule doit s'afficher au bon endroit à l'aide du bon symbole
 	void AfficherUnVehicule(Vehicule* unVehicule, Label^ label)
 	{
-		int x = 1;
-		int y = 1;
+		int x = unVehicule->getPositionX();
+		int y = unVehicule->getPositionY();
 		label->Location = System::Drawing::Point(x, y);
 		label->Name = gcnew String(unVehicule->getImmatriculation().c_str());
 		label->Text = gcnew String(unVehicule->getSymbole().c_str());
@@ -251,7 +251,12 @@ namespace Projet1 {
 				else
 				{
 					leVehicule = NULL;
+					cpt++;
 				}
+			}
+			else
+			{
+				cpt++;
 			}
 		}
 
@@ -265,9 +270,21 @@ namespace Projet1 {
 			x = fenetreDetails->getValeurX();
 			y = fenetreDetails->getValeurY();
 			//déplacement du véhicule à l'écran
-			//while ()
+			float DeltaY = (y - leVehicule->getPositionY());
+			float DeltaX = (x - leVehicule->getPositionX());
+			float a = (y - leVehicule->getPositionY()) / (x - leVehicule->getPositionX());
+			float b = y - (a*x);
+			while (x != leVehicule->getPositionX() && y != leVehicule->getPositionY())
 			{
-				//AfficherUnVehicule(leVehicule, label);
+				if (leVehicule->getPositionX() < x)
+				{
+					leVehicule->setPosition(leVehicule->getPositionX() + leVehicule->getVitesse(), (a*(leVehicule->getPositionX() + leVehicule->getVitesse())) + b);
+				}
+				else
+				{
+					leVehicule->setPosition(leVehicule->getPositionX() - leVehicule->getVitesse(), (a*(leVehicule->getPositionX() - leVehicule->getVitesse()))+ b);
+				}
+				AfficherUnVehicule(leVehicule, label);
 				Sleep(20);
 			}
 		}
