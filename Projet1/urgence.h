@@ -19,4 +19,7 @@ public:
 	virtual float getCoutBase();
 	virtual int getPositionX();
 	virtual int getPositionY();
+	virtual bool setNumeroUrgence(int);
+	virtual bool setCoutBase(float);
+	virtual bool setPositionUrgence(int,int);
 };

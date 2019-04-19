@@ -42,3 +42,21 @@ int Urgence::getPositionY()
 {
 	return positionUrgence.getPositionY();
 }
+
+bool Urgence::setNumeroUrgence(int inNumeroUrgence)
+{
+	numeroUrgence = inNumeroUrgence;
+	return true;
+}
+
+bool Urgence::setCoutBase(float inCoutBase)
+{
+	coutBase = inCoutBase;
+	return true;
+}
+
+bool Urgence::setPositionUrgence(int inX, int inY)
+{
+	positionUrgence.setPosition(inX, inY);
+	return true;
+}

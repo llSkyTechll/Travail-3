@@ -2,20 +2,32 @@
 
 Donnees::Donnees()
 {
-	for (int cpt = 0; cpt < maxVehicule; cpt++)
+	for (int cptVehicule = 0; cptVehicule < maxVehicule; cptVehicule++)
 	{
-		flotteVehicules[cpt] = NULL;
+		flotteVehicules[cptVehicule] = NULL;
+	}
+	for (int cptUrgence = 0; cptUrgence < maxUrgence; cptUrgence++)
+	{
+		listeUrgence[cptUrgence] = NULL;
 	}
 	InitialiserFlotteDepart();
+	InitialiserLesUrgences();
 }
 
 Donnees::~Donnees()
 {
-	for (int cpt = 0; cpt < maxVehicule; cpt++)
+	for (int cptVehicule = 0; cptVehicule < maxUrgence; cptVehicule++)
 	{
-		if (flotteVehicules[cpt] != NULL)
+		if (flotteVehicules[cptVehicule] != NULL)
 		{
-			delete flotteVehicules[cpt];
+			delete flotteVehicules[cptVehicule];
+		}
+	}
+	for (int cptUrgence = 0; cptUrgence < maxUrgence; cptUrgence++)
+	{
+		if (listeUrgence[cptUrgence] != NULL)
+		{
+			delete listeUrgence[cptUrgence];
 		}
 	}
 }
@@ -26,27 +38,101 @@ void Donnees::InitialiserFlotteDepart()
 	bool ajout;	
 	Vehicule* vehicule = NULL;
 	vehicule = new VehiculePromenade();
-	valide = AssignerValeurs(vehicule, 200, 100, "VP11", 1);
+	valide = AssignerValeursVehicule(vehicule, 200, 100, "VP11", 1);
 	if (valide)
 	{
 		ajout = AjouterVehicule(vehicule);
 	}
 	vehicule = new Ambulance();
-	valide = AssignerValeurs(vehicule, 400, 100, "AM20", 2);
+	valide = AssignerValeursVehicule(vehicule, 400, 100, "AM20", 2);
 	if (valide)
 	{
 		ajout = AjouterVehicule(vehicule);
 	}
 }
-bool Donnees::AssignerValeurs(Vehicule* inVehicule, int inX, int inY, string inImmatriculation, int inVitesse)
+
+void Donnees::InitialiserLesUrgences()
+{
+	bool valide = false;
+	bool ajout;
+	Urgence* urgence = NULL;
+	//Urgence medical
+	urgence = new UrgenceMedical();
+	valide = AssignerValeursUrgence(urgence, 150, 200, 50, 1);
+	if (valide)
+	{
+		ajout = AjouterUrgence(urgence);
+	}
+	urgence = new UrgenceMedical();
+	valide = AssignerValeursUrgence(urgence, 350, 150, 35, 3);
+	if (valide)
+	{
+		ajout = AjouterUrgence(urgence);
+	}
+	urgence = new UrgenceMedical();
+	valide = AssignerValeursUrgence(urgence, 150, 275, 76, 2);
+	if (valide)
+	{
+		ajout = AjouterUrgence(urgence);
+	}
+	urgence = new UrgenceMedical();
+	valide = AssignerValeursUrgence(urgence, 175, 200, 15, 4);
+	if (valide)
+	{
+		ajout = AjouterUrgence(urgence);
+	}
+	//Urgence de feu
+	urgence = new UrgenceDeFeu();
+	valide = AssignerValeursUrgence(urgence, 400, 100, 25, 5);
+	if (valide)
+	{
+		ajout = AjouterUrgence(urgence);
+	}
+	urgence = new UrgenceDeFeu();
+	valide = AssignerValeursUrgence(urgence, 350, 350, 35, 6);
+	if (valide)
+	{
+		ajout = AjouterUrgence(urgence);
+	}
+	urgence = new UrgenceDeFeu();
+	valide = AssignerValeursUrgence(urgence, 245, 50, 30, 7);
+	if (valide)
+	{
+		ajout = AjouterUrgence(urgence);
+	}
+	urgence = new UrgenceDeFeu();
+	valide = AssignerValeursUrgence(urgence, 500, 100, 57, 8);
+	if (valide)
+	{
+		ajout = AjouterUrgence(urgence);
+	}
+	//Urgence nationale
+	urgence = new UrgenceNationale();
+	valide = AssignerValeursUrgence(urgence, 400, 250, 750, 5);
+	if (valide)
+	{
+		ajout = AjouterUrgence(urgence);
+	}
+}
+
+bool Donnees::AssignerValeursVehicule(Vehicule* inVehicule, int inX, int inY, string inImmatriculation, int inVitesse)
 {
 	bool valide = false;
 	valide = inVehicule->setPosition(inX, inY);
 	valide = inVehicule->setImmatriculation(inImmatriculation);
 	valide = inVehicule->setVitesse(inVitesse);
-
 	return valide;
 }
+
+bool Donnees::AssignerValeursUrgence(Urgence* inUrgence, int inX, int inY, float inCoutBase, int inNumeroUrgence)
+{
+	bool valide = false;
+	valide = inUrgence->setPositionUrgence(inX,inY);
+	valide = inUrgence->setCoutBase(inCoutBase);
+	valide = inUrgence->setNumeroUrgence(inNumeroUrgence);
+	return valide;
+}
+
 int Donnees::AjouterVehicule(Vehicule* nouveauVehicule)
 {
 	int cpt = 0;
@@ -58,8 +144,22 @@ int Donnees::AjouterVehicule(Vehicule* nouveauVehicule)
 			return cpt;
 		}
 		cpt++;
-
 	}	
+	return -1;
+}
+
+int Donnees::AjouterUrgence(Urgence* inUrgence)
+{
+	int cpt = 0;
+	while (cpt < maxUrgence)
+	{
+		if (listeUrgence[cpt] == NULL)
+		{
+			listeUrgence[cpt] = inUrgence;
+			return cpt;
+		}
+		cpt++;
+	}
 	return -1;
 }
 
