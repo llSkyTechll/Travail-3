@@ -141,6 +141,7 @@
     <ClCompile Include="pompier.cpp" />
     <ClCompile Include="urgence.cpp" />
     <ClCompile Include="urgenceMedical.cpp" />
+    <ClCompile Include="urgenceNationale.cpp" />
     <ClCompile Include="vehicule.cpp" />
     <ClCompile Include="donnees.cpp" />
     <ClCompile Include="MyForm.cpp" />
@@ -156,6 +157,7 @@
     </ClInclude>
     <ClInclude Include="pompier.h" />
     <ClInclude Include="urgenceMedical.h" />
+    <ClInclude Include="urgenceNationale.h" />
     <ClInclude Include="vehicule.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="donnees.h" />

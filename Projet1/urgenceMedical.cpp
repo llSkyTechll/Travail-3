@@ -6,7 +6,7 @@ UrgenceMedical::UrgenceMedical() : Urgence()
 }
 
 UrgenceMedical::UrgenceMedical(const UrgenceMedical& inUrgenceMedical) 
-: Urgence(inUrgenceMedical)
+	: Urgence(inUrgenceMedical)
 {
 
 }
