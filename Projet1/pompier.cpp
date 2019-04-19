@@ -74,3 +74,10 @@ bool Pompier::recupererUrgence(string inUrgence)
 	}
 	return false;
 }
+
+float Pompier::calculerCoutUrgence(int inX, int inY, float inCoutBase)
+{
+	float distance = sqrt((pow((inX - positionVehicule.getPositionX()), 2))
+		+ pow((inY - positionVehicule.getPositionY()), 2));
+	return (inCoutBase * distance * 2);
+}

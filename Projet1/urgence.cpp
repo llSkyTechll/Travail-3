@@ -22,3 +22,23 @@ Urgence::Urgence(const Urgence& inUrgence):positionUrgence(inUrgence.positionUrg
 Urgence::~Urgence()
 {
 }
+
+int Urgence::getNumeroUrgence()
+{
+	return numeroUrgence;
+}
+
+float Urgence::getCoutBase()
+{
+	return coutBase;
+}
+
+int Urgence::getPositionX()
+{
+	return positionUrgence.getPositionX();
+}
+
+int Urgence::getPositionY()
+{
+	return positionUrgence.getPositionY();
+}

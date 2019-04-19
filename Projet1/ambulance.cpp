@@ -1,4 +1,5 @@
 #include "ambulance.h"
+#include <math.h>
 
 Ambulance::Ambulance():VehiculeUrgence()
 {
@@ -73,4 +74,11 @@ bool Ambulance::recupererUrgence(string inUrgence)
 		return true;
 	}
 	return false;
+}
+
+float Ambulance::calculerCoutUrgence(int inX, int inY, float inCoutBase)
+{
+	float distance = sqrt((pow((inX - positionVehicule.getPositionX()), 2)) 
+					+ pow((inY - positionVehicule.getPositionY()), 2));
+	return (inCoutBase * distance);
 }

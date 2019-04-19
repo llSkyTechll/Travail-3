@@ -2,6 +2,7 @@
 #include <string>
 using namespace std;
 #include "vehicule.h"
+#include "urgence.h"
 
 class VehiculeUrgence : public Vehicule
 {
@@ -17,4 +18,5 @@ public:
 	virtual bool setImmatriculation(string) = 0;
 	virtual void deplacerVehicule(int, int) = 0;
 	virtual bool recupererUrgence(string) = 0;
+	virtual float calculerCoutUrgence(int,int,float) = 0;
 };
