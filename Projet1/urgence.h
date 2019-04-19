@@ -11,6 +11,7 @@ protected:
 	Position positionUrgence;
 public:
 	Urgence();
+	Urgence(int inNumeroUrgence, float inCoutBase, int inX, int inY);
 	Urgence(const Urgence&);
 	virtual ~Urgence();
 };

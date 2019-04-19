@@ -9,6 +9,7 @@ protected:
 
 public:
 	UrgenceDeFeu();
+	UrgenceDeFeu(int inNumeroUrgence, float inCoutBase, int inX, int inY);
 	UrgenceDeFeu(const UrgenceDeFeu&);
 	~UrgenceDeFeu();
 };

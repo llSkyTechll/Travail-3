@@ -6,6 +6,13 @@ Urgence::Urgence():positionUrgence()
 	coutBase = 0;
 }
 
+Urgence::Urgence(int inNumeroUrgence, float inCoutBase, int inX, int inY) 
+	: positionUrgence(inX, inY)
+{
+	numeroUrgence = inNumeroUrgence;
+	coutBase = inCoutBase;
+}
+
 Urgence::Urgence(const Urgence& inUrgence):positionUrgence(inUrgence.positionUrgence)
 {
 	numeroUrgence = inUrgence.numeroUrgence;

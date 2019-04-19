@@ -9,6 +9,7 @@ protected:
 
 public :
 	UrgenceNationale();
+	UrgenceNationale(int inNumeroUrgence, float inCoutBase, int inX, int inY);
 	UrgenceNationale(const UrgenceNationale&);
 	~UrgenceNationale();
 };

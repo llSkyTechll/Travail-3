@@ -9,6 +9,7 @@ protected:
 	
 public:
 	UrgenceMedical();
+	UrgenceMedical(int inNumeroUrgence, float inCoutBase, int inX, int inY);
 	UrgenceMedical(const UrgenceMedical&);
 	virtual ~UrgenceMedical();
 };
