@@ -9,7 +9,7 @@ protected:
 	int numeroUrgence;
 	float coutBase;
 	Position positionUrgence;
-private:
+public:
 	Urgence();
 	Urgence(const Urgence&);
 	virtual ~Urgence();

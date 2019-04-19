@@ -2,14 +2,17 @@
 
 VehiculeUrgence::VehiculeUrgence():Vehicule()
 {
+
 }
 
 VehiculeUrgence::VehiculeUrgence(const VehiculeUrgence &inVehicule):Vehicule(inVehicule)
 {
+
 }
 
 VehiculeUrgence::~VehiculeUrgence()
 {
+
 }
 
 bool VehiculeUrgence::setVitesse(int inVitesse)
