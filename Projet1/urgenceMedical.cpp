@@ -21,3 +21,8 @@ UrgenceMedical::~UrgenceMedical()
 {
 
 }
+
+string UrgenceMedical::getTypeUrgence()
+{
+	return "Medical";
+}

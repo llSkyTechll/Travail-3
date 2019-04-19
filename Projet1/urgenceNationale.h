@@ -12,4 +12,5 @@ public :
 	UrgenceNationale(int inNumeroUrgence, float inCoutBase, int inX, int inY);
 	UrgenceNationale(const UrgenceNationale&);
 	~UrgenceNationale();
+	virtual string getTypeUrgence();
 };

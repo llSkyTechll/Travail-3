@@ -21,3 +21,8 @@ UrgenceNationale::~UrgenceNationale()
 {
 
 }
+
+string UrgenceNationale::getTypeUrgence()
+{
+	return "Nationale";
+}

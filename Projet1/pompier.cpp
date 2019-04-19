@@ -65,3 +65,12 @@ void Pompier::deplacerVehicule(int inX, int inY)
 		positionVehicule.setPosition(inX, inY);
 	}
 }
+
+bool Pompier::recupererUrgence(string inUrgence)
+{
+	if (inUrgence == "Incendie")
+	{
+		return true;
+	}
+	return false;
+}

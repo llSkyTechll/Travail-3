@@ -12,4 +12,5 @@ public:
 	UrgenceDeFeu(int inNumeroUrgence, float inCoutBase, int inX, int inY);
 	UrgenceDeFeu(const UrgenceDeFeu&);
 	~UrgenceDeFeu();
+	virtual string getTypeUrgence();
 };

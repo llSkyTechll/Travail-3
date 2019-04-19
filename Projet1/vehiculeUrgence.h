@@ -16,4 +16,5 @@ public:
 	bool setVitesse(int);
 	virtual bool setImmatriculation(string) = 0;
 	virtual void deplacerVehicule(int, int) = 0;
+	virtual bool recupererUrgence(string) = 0;
 };

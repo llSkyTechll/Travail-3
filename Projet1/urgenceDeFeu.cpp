@@ -21,3 +21,8 @@ UrgenceDeFeu::~UrgenceDeFeu()
 {
 
 }
+
+string UrgenceDeFeu::getTypeUrgence()
+{
+	return "Incendie";
+}

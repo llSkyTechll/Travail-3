@@ -14,4 +14,5 @@ public:
 	Urgence(int inNumeroUrgence, float inCoutBase, int inX, int inY);
 	Urgence(const Urgence&);
 	virtual ~Urgence();
+	virtual string getTypeUrgence() = 0;
 };

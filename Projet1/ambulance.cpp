@@ -65,3 +65,12 @@ void Ambulance::deplacerVehicule(int inX, int inY)
 		positionVehicule.setPosition(inX, inY);
 	}
 }
+
+bool Ambulance::recupererUrgence(string inUrgence)
+{
+	if (inUrgence == "Medical")
+	{
+		return true;
+	}
+	return false;
+}
