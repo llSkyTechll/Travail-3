@@ -56,6 +56,8 @@ namespace Projet1 {
 	private: System::Windows::Forms::Button^  btnBizarre;
 	private: System::Windows::Forms::ComboBox^  comboUrgences;
 	private: System::Windows::Forms::ComboBox^  comboVehiculesDisponibles;
+	private: System::Windows::Forms::Label^  lblUrgence;
+	private: System::Windows::Forms::Label^  lblVehiculesDisponibles;
 
 
 
@@ -81,6 +83,8 @@ namespace Projet1 {
 			this->btnBizarre = (gcnew System::Windows::Forms::Button());
 			this->comboUrgences = (gcnew System::Windows::Forms::ComboBox());
 			this->comboVehiculesDisponibles = (gcnew System::Windows::Forms::ComboBox());
+			this->lblUrgence = (gcnew System::Windows::Forms::Label());
+			this->lblVehiculesDisponibles = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// comboVehicule
@@ -161,18 +165,37 @@ namespace Projet1 {
 			// comboUrgences
 			// 
 			this->comboUrgences->FormattingEnabled = true;
-			this->comboUrgences->Location = System::Drawing::Point(140, 12);
+			this->comboUrgences->Location = System::Drawing::Point(161, 39);
 			this->comboUrgences->Name = L"comboUrgences";
 			this->comboUrgences->Size = System::Drawing::Size(121, 21);
 			this->comboUrgences->TabIndex = 13;
+			this->comboUrgences->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::comboUrgences_SelectedIndexChanged);
 			// 
 			// comboVehiculesDisponibles
 			// 
 			this->comboVehiculesDisponibles->FormattingEnabled = true;
-			this->comboVehiculesDisponibles->Location = System::Drawing::Point(267, 12);
+			this->comboVehiculesDisponibles->Location = System::Drawing::Point(361, 39);
 			this->comboVehiculesDisponibles->Name = L"comboVehiculesDisponibles";
 			this->comboVehiculesDisponibles->Size = System::Drawing::Size(121, 21);
 			this->comboVehiculesDisponibles->TabIndex = 14;
+			// 
+			// lblUrgence
+			// 
+			this->lblUrgence->AutoSize = true;
+			this->lblUrgence->Location = System::Drawing::Point(161, 20);
+			this->lblUrgence->Name = L"lblUrgence";
+			this->lblUrgence->Size = System::Drawing::Size(56, 13);
+			this->lblUrgence->TabIndex = 15;
+			this->lblUrgence->Text = L"Urgences:";
+			// 
+			// lblVehiculesDisponibles
+			// 
+			this->lblVehiculesDisponibles->AutoSize = true;
+			this->lblVehiculesDisponibles->Location = System::Drawing::Point(358, 20);
+			this->lblVehiculesDisponibles->Name = L"lblVehiculesDisponibles";
+			this->lblVehiculesDisponibles->Size = System::Drawing::Size(111, 13);
+			this->lblVehiculesDisponibles->TabIndex = 16;
+			this->lblVehiculesDisponibles->Text = L"Véhicules disponibles:";
 			// 
 			// MyForm
 			// 
@@ -180,6 +203,8 @@ namespace Projet1 {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(1028, 629);
+			this->Controls->Add(this->lblVehiculesDisponibles);
+			this->Controls->Add(this->lblUrgence);
 			this->Controls->Add(this->comboVehiculesDisponibles);
 			this->Controls->Add(this->comboUrgences);
 			this->Controls->Add(this->btnBizarre);
@@ -193,6 +218,7 @@ namespace Projet1 {
 			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -218,7 +244,7 @@ namespace Projet1 {
 		{
 			if (flotte.getUrgence(cptUrgences) != NULL)
 			{
-				comboUrgences->Items->Add(gcnew String(flotte.getUrgence(cptUrgences)->getNumeroUrgence().c_str()));
+				comboUrgences->Items->Add(flotte.getUrgence(cptUrgences)->getNumeroUrgence().ToString());
 			}
 		}
 	}
@@ -427,7 +453,29 @@ private: System::Void btnEnlever_Click(System::Object^  sender, System::EventArg
 		MessageBox::Show("Veuillez sélectionner un véhicule.");
 	}
 }
+
 private: System::Void comboVehicule_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+}
+
+private: System::Void comboUrgences_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+	comboVehiculesDisponibles->Items->Clear();
+	for (int cptUrgences = 0; cptUrgences < maxUrgence; cptUrgences++)
+	{
+		if (flotte.getUrgence(cptUrgences)->getNumeroUrgence() == Convert::ToInt32(comboUrgences->SelectedText))
+		{
+			urgenceCourante = flotte.getUrgence(cptUrgences);
+		}
+	}
+	if (urgenceCourante != NULL)
+	{
+		for (int cpt = 0; cpt < maxVehicule; cpt++)
+		{
+			if (flotte.getVehicule(cpt)->recupererUrgence(urgenceCourante->getTypeUrgence()) == true)
+			{
+				comboVehiculesDisponibles->Items->Add(gcnew String(flotte.getVehicule(cpt)->getImmatriculation().c_str()));
+			}
+		}
+	}
 }
 };
 }

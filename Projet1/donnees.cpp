@@ -83,7 +83,7 @@ void Donnees::InitialiserLesUrgences()
 	}
 	//Urgence de feu
 	urgence = new UrgenceDeFeu();
-	valide = AssignerValeursUrgence(urgence, 400, 100, 25, 5);
+	valide = AssignerValeursUrgence(urgence, 400, 100, 25, 10);
 	if (valide)
 	{
 		ajout = AjouterUrgence(urgence);
