@@ -21,5 +21,7 @@ public:
 	bool setPosition(int, int);
 	int getPositionX() const;
 	int getPositionY() const;
+	virtual bool recupererUrgence(string);
+	virtual float calculerCoutUrgence(int, int, float);
 	virtual void deplacerVehicule(int,int) = 0;
 };
