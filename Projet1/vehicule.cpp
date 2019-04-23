@@ -28,6 +28,15 @@ int Vehicule::getPositionY()const
 {
 	return positionVehicule.getPositionY();
 }
+bool Vehicule::recupererUrgence(string inUrgence)
+{
+	return false;
+}
+
+float Vehicule::calculerCoutUrgence(int inX, int inY, float inCoutBase)
+{
+	return (0);
+}
 
 bool Vehicule::setVitesse(int inVitesse)
 {
