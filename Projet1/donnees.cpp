@@ -197,3 +197,17 @@ bool Donnees::EnleverVehicule(int place)
 	}
 	return detruit;
 }
+bool Donnees::EnleverUrgence(int place)
+{
+	bool detruit = false;
+	if (place >= 0 && place < maxVehicule)
+	{
+		if (listeUrgence[place] != NULL)
+		{
+			delete listeUrgence[place];
+			listeUrgence[place] = NULL;
+			detruit = true;
+		}
+	}
+	return detruit;
+}
