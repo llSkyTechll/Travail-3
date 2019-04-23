@@ -176,7 +176,7 @@ Vehicule* Donnees::getVehicule(int inIndice)
 Urgence* Donnees::getUrgence(int InUrgence)
 {
 	Urgence* urgence = NULL;
-	if (InUrgence >= 0 && InUrgence < maxUrgence && listeUrgence[InUrgence != NULL])
+	if (InUrgence >= 0 && InUrgence < maxUrgence && listeUrgence[InUrgence] != NULL)
 	{
 		urgence = listeUrgence[InUrgence];
 	}
@@ -200,7 +200,7 @@ bool Donnees::EnleverVehicule(int place)
 bool Donnees::EnleverUrgence(int place)
 {
 	bool detruit = false;
-	if (place >= 0 && place < maxVehicule)
+	if (place >= 0 && place < maxUrgence)
 	{
 		if (listeUrgence[place] != NULL)
 		{

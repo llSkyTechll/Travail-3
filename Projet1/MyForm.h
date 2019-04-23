@@ -527,7 +527,8 @@ private: System::Void comboVehiculesDisponibles_SelectedIndexChanged(System::Obj
 		}
 	}
 	InitialiserCombo();
-	comboVehiculesDisponibles->Refresh();
+	comboUrgences->Text = "";
+	comboVehiculesDisponibles->Items->Clear();
 }
 };
 }
