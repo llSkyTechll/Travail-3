@@ -58,6 +58,8 @@ namespace Projet1 {
 	private: System::Windows::Forms::ComboBox^  comboVehiculesDisponibles;
 	private: System::Windows::Forms::Label^  lblUrgence;
 	private: System::Windows::Forms::Label^  lblVehiculesDisponibles;
+	private: System::Windows::Forms::TextBox^  txtCout;
+	private: System::Windows::Forms::Label^  lblCout;
 
 
 
@@ -85,6 +87,8 @@ namespace Projet1 {
 			this->comboVehiculesDisponibles = (gcnew System::Windows::Forms::ComboBox());
 			this->lblUrgence = (gcnew System::Windows::Forms::Label());
 			this->lblVehiculesDisponibles = (gcnew System::Windows::Forms::Label());
+			this->txtCout = (gcnew System::Windows::Forms::TextBox());
+			this->lblCout = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// comboVehicule
@@ -178,6 +182,7 @@ namespace Projet1 {
 			this->comboVehiculesDisponibles->Name = L"comboVehiculesDisponibles";
 			this->comboVehiculesDisponibles->Size = System::Drawing::Size(121, 21);
 			this->comboVehiculesDisponibles->TabIndex = 14;
+			this->comboVehiculesDisponibles->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::comboVehiculesDisponibles_SelectedIndexChanged);
 			// 
 			// lblUrgence
 			// 
@@ -197,12 +202,31 @@ namespace Projet1 {
 			this->lblVehiculesDisponibles->TabIndex = 16;
 			this->lblVehiculesDisponibles->Text = L"Véhicules disponibles:";
 			// 
+			// txtCout
+			// 
+			this->txtCout->Enabled = false;
+			this->txtCout->Location = System::Drawing::Point(546, 39);
+			this->txtCout->Name = L"txtCout";
+			this->txtCout->Size = System::Drawing::Size(100, 20);
+			this->txtCout->TabIndex = 17;
+			// 
+			// lblCout
+			// 
+			this->lblCout->AutoSize = true;
+			this->lblCout->Location = System::Drawing::Point(543, 20);
+			this->lblCout->Name = L"lblCout";
+			this->lblCout->Size = System::Drawing::Size(32, 13);
+			this->lblCout->TabIndex = 18;
+			this->lblCout->Text = L"Cout:";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(1028, 629);
+			this->Controls->Add(this->lblCout);
+			this->Controls->Add(this->txtCout);
 			this->Controls->Add(this->lblVehiculesDisponibles);
 			this->Controls->Add(this->lblUrgence);
 			this->Controls->Add(this->comboVehiculesDisponibles);
@@ -459,9 +483,10 @@ private: System::Void comboVehicule_SelectedIndexChanged(System::Object^  sender
 
 private: System::Void comboUrgences_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 	comboVehiculesDisponibles->Items->Clear();
+	txtCout->Text = "0";
 	for (int cptUrgences = 0; cptUrgences < maxUrgence; cptUrgences++)
 	{
-		if (flotte.getUrgence(cptUrgences)->getNumeroUrgence() == Convert::ToInt32(comboUrgences->SelectedText))
+		if (flotte.getUrgence(cptUrgences)  != NULL && flotte.getUrgence(cptUrgences)->getNumeroUrgence() == Convert::ToInt32(comboUrgences->Text))
 		{
 			urgenceCourante = flotte.getUrgence(cptUrgences);
 		}
@@ -470,12 +495,39 @@ private: System::Void comboUrgences_SelectedIndexChanged(System::Object^  sender
 	{
 		for (int cpt = 0; cpt < maxVehicule; cpt++)
 		{
-			if (flotte.getVehicule(cpt)->recupererUrgence(urgenceCourante->getTypeUrgence()) == true)
+			if (flotte.getVehicule(cpt) != NULL && flotte.getVehicule(cpt)->recupererUrgence(urgenceCourante->getTypeUrgence()) == true)
 			{
 				comboVehiculesDisponibles->Items->Add(gcnew String(flotte.getVehicule(cpt)->getImmatriculation().c_str()));
 			}
 		}
 	}
+}
+private: System::Void comboVehiculesDisponibles_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+	for (int cpt = 0; cpt < maxVehicule; cpt++)
+	{
+		if (flotte.getVehicule(cpt) != NULL && flotte.getVehicule(cpt)->getImmatriculation() == msclr::interop::marshal_as<std::string>(comboVehiculesDisponibles->Text))
+		{
+			vehiculeCourant = flotte.getVehicule(cpt);
+			txtCout->Text = (vehiculeCourant->calculerCoutUrgence(urgenceCourante->getPositionX(), urgenceCourante->getPositionY(), urgenceCourante->getCoutBase()).ToString());
+		}
+	}
+	Label^ label = TrouverConteneurDuVehicule(gcnew String(vehiculeCourant->getImmatriculation().c_str()));
+	while (urgenceCourante->getPositionX() != vehiculeCourant->getPositionX() || urgenceCourante->getPositionY() != vehiculeCourant->getPositionY())
+	{
+		vehiculeCourant->deplacerVehicule(urgenceCourante->getPositionX(), urgenceCourante->getPositionY());
+		AfficherUnVehicule(vehiculeCourant, label);
+		Sleep(20);
+	}
+	for (int cptUrgence = 0; cptUrgence < maxUrgence; cptUrgence++)
+	{
+		if (flotte.getUrgence(cptUrgence) != NULL && flotte.getUrgence(cptUrgence) == urgenceCourante)
+		{
+			flotte.EnleverUrgence(cptUrgence);
+			urgenceCourante = NULL;
+		}
+	}
+	InitialiserCombo();
+	comboVehiculesDisponibles->Refresh();
 }
 };
 }
