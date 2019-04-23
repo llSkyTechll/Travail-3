@@ -23,6 +23,7 @@ public:
 	Donnees::Donnees();
 	Donnees::~Donnees();
 	Vehicule* getVehicule(int);
+	Urgence* getUrgence(int);
 	bool AssignerValeursVehicule(Vehicule* inVehicule, int inX, int inY, string inImmatriculation, int inVitesse);
 	bool AssignerValeursUrgence(Urgence* inUrgence, int inX, int inY, float inCoutBase, int inNumeroUrgence);
 	int AjouterVehicule(Vehicule*);
