@@ -29,5 +29,6 @@ public:
 	int AjouterVehicule(Vehicule*);
 	int AjouterUrgence(Urgence*);
 	bool EnleverVehicule(int);
+	bool EnleverUrgence(int);
 };
 
