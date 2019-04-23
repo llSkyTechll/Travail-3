@@ -15,6 +15,7 @@ namespace Projet1 {
 
 	Donnees flotte;
 	Vehicule* vehiculeCourant;
+	Urgence* urgenceCourante;
 
 	/// <summary>
 	/// Description résumée de MyForm
@@ -53,6 +54,10 @@ namespace Projet1 {
 	private: System::Windows::Forms::Button^  btnEnlever;
 	private: System::Windows::Forms::Button^  btnPompier;
 	private: System::Windows::Forms::Button^  btnBizarre;
+	private: System::Windows::Forms::ComboBox^  comboUrgences;
+	private: System::Windows::Forms::ComboBox^  comboVehiculesDisponibles;
+
+
 
 	private:
 		/// <summary>
@@ -74,6 +79,8 @@ namespace Projet1 {
 			this->btnEnlever = (gcnew System::Windows::Forms::Button());
 			this->btnPompier = (gcnew System::Windows::Forms::Button());
 			this->btnBizarre = (gcnew System::Windows::Forms::Button());
+			this->comboUrgences = (gcnew System::Windows::Forms::ComboBox());
+			this->comboVehiculesDisponibles = (gcnew System::Windows::Forms::ComboBox());
 			this->SuspendLayout();
 			// 
 			// comboVehicule
@@ -83,6 +90,7 @@ namespace Projet1 {
 			this->comboVehicule->Name = L"comboVehicule";
 			this->comboVehicule->Size = System::Drawing::Size(121, 21);
 			this->comboVehicule->TabIndex = 5;
+			this->comboVehicule->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::comboVehicule_SelectedIndexChanged);
 			// 
 			// btnDeplacer
 			// 
@@ -150,12 +158,30 @@ namespace Projet1 {
 			this->btnBizarre->UseVisualStyleBackColor = true;
 			this->btnBizarre->Click += gcnew System::EventHandler(this, &MyForm::btnVoiture_Click);
 			// 
+			// comboUrgences
+			// 
+			this->comboUrgences->FormattingEnabled = true;
+			this->comboUrgences->Location = System::Drawing::Point(140, 12);
+			this->comboUrgences->Name = L"comboUrgences";
+			this->comboUrgences->Size = System::Drawing::Size(121, 21);
+			this->comboUrgences->TabIndex = 13;
+			// 
+			// comboVehiculesDisponibles
+			// 
+			this->comboVehiculesDisponibles->FormattingEnabled = true;
+			this->comboVehiculesDisponibles->Location = System::Drawing::Point(267, 12);
+			this->comboVehiculesDisponibles->Name = L"comboVehiculesDisponibles";
+			this->comboVehiculesDisponibles->Size = System::Drawing::Size(121, 21);
+			this->comboVehiculesDisponibles->TabIndex = 14;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(1028, 629);
+			this->Controls->Add(this->comboVehiculesDisponibles);
+			this->Controls->Add(this->comboUrgences);
 			this->Controls->Add(this->btnBizarre);
 			this->Controls->Add(this->btnPompier);
 			this->Controls->Add(this->btnEnlever);
@@ -185,6 +211,14 @@ namespace Projet1 {
 			if (flotte.getVehicule(cpt) != NULL)
 			{
 			comboVehicule->Items->Add(gcnew String (flotte.getVehicule(cpt)->getImmatriculation().c_str()));
+			}
+		}
+		comboUrgences->Items->Clear();
+		for (int cptUrgences = 0; cptUrgences < maxUrgence; cptUrgences++)
+		{
+			if (flotte.getUrgence(cptUrgences) != NULL)
+			{
+				comboUrgences->Items->Add(gcnew String(flotte.getUrgence(cptUrgences)->getNumeroUrgence().c_str()));
 			}
 		}
 	}
@@ -392,6 +426,8 @@ private: System::Void btnEnlever_Click(System::Object^  sender, System::EventArg
 	{
 		MessageBox::Show("Veuillez sélectionner un véhicule.");
 	}
+}
+private: System::Void comboVehicule_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }
